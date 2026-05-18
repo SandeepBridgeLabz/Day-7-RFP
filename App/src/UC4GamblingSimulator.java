@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class UC3GamblingSimulator {
+public class UC4GamblingSimulator {
 
     private static final int STAKE = 100;
     private static final int BET = 1;
@@ -10,16 +10,27 @@ public class UC3GamblingSimulator {
 
         int totalAmount = 0;
 
+        int winningDays = 0;
+        int losingDays = 0;
+
         for (int day = 1; day <= DAYS; day++) {
 
             int result = playForDay();
 
             totalAmount += result;
 
-            System.out.println("Day " + day + ": $" + result);
+            if (result > 0) {
+                winningDays++;
+            } else {
+                losingDays++;
+            }
         }
 
-        System.out.println("Total Amount After 20 Days: $" + totalAmount);
+        System.out.println("Winning Days: " + winningDays);
+
+        System.out.println("Losing Days: " + losingDays);
+
+        System.out.println("Total Amount: $" + totalAmount);
     }
 
     public static int playForDay() {
