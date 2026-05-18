@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class UC4GamblingSimulator {
+public class UC5GamblingSimulator {
 
     private static final int STAKE = 100;
     private static final int BET = 1;
@@ -8,29 +8,32 @@ public class UC4GamblingSimulator {
 
     public static void main(String[] args) {
 
-        int totalAmount = 0;
+        int maxWin = Integer.MIN_VALUE;
+        int maxLoss = Integer.MAX_VALUE;
 
-        int winningDays = 0;
-        int losingDays = 0;
+        int luckiestDay = 0;
+        int unluckiestDay = 0;
 
         for (int day = 1; day <= DAYS; day++) {
 
             int result = playForDay();
 
-            totalAmount += result;
+            if (result > maxWin) {
+                maxWin = result;
+                luckiestDay = day;
+            }
 
-            if (result > 0) {
-                winningDays++;
-            } else {
-                losingDays++;
+            if (result < maxLoss) {
+                maxLoss = result;
+                unluckiestDay = day;
             }
         }
 
-        System.out.println("Winning Days: " + winningDays);
+        System.out.println("Luckiest Day: Day " + luckiestDay
+                + " Won $" + maxWin);
 
-        System.out.println("Losing Days: " + losingDays);
-
-        System.out.println("Total Amount: $" + totalAmount);
+        System.out.println("Unluckiest Day: Day " + unluckiestDay
+                + " Lost $" + maxLoss);
     }
 
     public static int playForDay() {
